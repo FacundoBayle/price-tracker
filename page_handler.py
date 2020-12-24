@@ -1,4 +1,5 @@
 import sys
+from error_handler import InvalidPageError
 
 class PageHandler:
     
@@ -22,13 +23,14 @@ class PageHandler:
         page_name = self.getPageFromUrl()
 
         if page_name is None:
-            sys.exit("PAGE NOT FOUND, STOP EXECUTION") # change for error_handler
+            raise InvalidPageError
+            #send error mail
         else:
             print(page_name)
 
         price_id = self.getPriceIdToTrack(page_name)
         print(price_id)
 
-        return self.page_content.find("span", class_=price_id).text
+        return self.page_content.find("span", class_=price_id)
         
 
