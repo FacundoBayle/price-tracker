@@ -3,14 +3,17 @@ from email.message import EmailMessage
 
 class MailBuilder:
 
-    def __init__(self, page_content, price_value):
+    def __init__(self, page_content, price_value, url):
         self.page_content = page_content
         self.price_value = price_value
+        self.url = url
         with open('./credentials.json') as cred:
             credentials = json.load(cred)
             self.email_address = credentials["user"]
         with open('./mail/mail.html') as mailContent:
             self.mail_content = mailContent.read()
+        with open('./mail/error-mail.html') as errorMailContent:
+            self.error_mail_content = errorMailContent.read()
 
     def build_mail(self):
         print("Building Mail")
@@ -20,7 +23,20 @@ class MailBuilder:
         msg['From'] = self.email_address
         msg['To'] = self.email_address
 
-        mail = self.mail_content.format(price_value=self.price_value)
+        mail = self.mail_content.format(price_value=self.price_value.text, url=self.url)
+        msg.add_alternative(mail, subtype='html')
+
+        return msg
+
+    def build_error_mail(self):
+        print("Building Error Mail")
+
+        msg = EmailMessage()
+        msg['Subject'] = '[ERROR] PriceTracker'
+        msg['From'] = self.email_address
+        msg['To'] = self.email_address
+
+        mail = self.error_mail_content.format(url=self.url)
         msg.add_alternative(mail, subtype='html')
 
         return msg

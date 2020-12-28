@@ -13,15 +13,14 @@ def main():
     pageHandler = PageHandler(url, page_content)
     price_value = pageHandler.getPriceValueFromPageContent()
 
-    print(price_value.text)
+    mailBuilder = MailBuilder(page_content, price_value, url)
 
     if price_value is None:
-        raise PriceNotFoundError
-        #send error mail
+        #Build error mail
+        mail = mailBuilder.build_error_mail()
+    else:
+        mail = mailBuilder.build_mail()
 
-    mailBuilder = MailBuilder(page_content, price_value.text)
-    mail = mailBuilder.build_mail()
-    
     mailSender = MailSender(mail)
     mailSender.send_mail()
 

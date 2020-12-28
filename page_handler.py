@@ -24,7 +24,6 @@ class PageHandler:
 
         if page_name is None:
             raise InvalidPageError
-            #send error mail
         else:
             print(page_name)
 
