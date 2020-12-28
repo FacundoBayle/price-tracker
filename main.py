@@ -1,4 +1,3 @@
-import sys
 from scraper import Scraper
 from page_handler import PageHandler
 from mail.mail_builder import MailBuilder
