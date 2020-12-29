@@ -1,4 +1,4 @@
-import json,smtplib
+import json,smtplib,logging
 
 class MailSender:
 
@@ -13,7 +13,8 @@ class MailSender:
         with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
             smtp.login(self.email_address, self.email_password)
             
-            print("Sending Mail")
+            logging.info("Sending Mail")
+            
             smtp.send_message(self.mail)
         
     def has_to_send_mail(self):

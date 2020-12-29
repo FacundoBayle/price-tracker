@@ -1,4 +1,4 @@
-import json
+import json, logging
 from email.message import EmailMessage
 
 class MailBuilder:
@@ -16,8 +16,6 @@ class MailBuilder:
             self.error_mail_content = errorMailContent.read()
 
     def build_mail(self):
-        print("Building Mail")
-
         msg = EmailMessage()
         msg['Subject'] = 'PriceTracker'
         msg['From'] = self.email_address
@@ -26,11 +24,10 @@ class MailBuilder:
         mail = self.mail_content.format(price_value=self.price_value.text, url=self.url)
         msg.add_alternative(mail, subtype='html')
 
+        logging.info("Price mail builded successfully.")
         return msg
 
     def build_error_mail(self):
-        print("Building Error Mail")
-
         msg = EmailMessage()
         msg['Subject'] = '[ERROR] PriceTracker'
         msg['From'] = self.email_address
@@ -39,4 +36,5 @@ class MailBuilder:
         mail = self.error_mail_content.format(url=self.url)
         msg.add_alternative(mail, subtype='html')
 
+        logging.info("Error mail builded successfully.")
         return msg

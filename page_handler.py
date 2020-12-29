@@ -1,4 +1,4 @@
-import sys
+import sys,logging
 from error_handler import InvalidPageError
 
 class PageHandler:
@@ -7,7 +7,7 @@ class PageHandler:
         self.url = url
         self.PAGES_TRACK_ID = {
             'mercadolibre': "price-tag",
-            'tiendamia': "currency_price",
+            'tiendamia': "currenc_price",
         }
         self.page_content = page_content
 
@@ -23,12 +23,12 @@ class PageHandler:
         page_name = self.getPageFromUrl()
 
         if page_name is None:
+            logging.error(f"Invalid Page for url: {self.url}. The website is not in the list of sites available to track.")
             raise InvalidPageError
         else:
-            print(page_name)
+            logging.info(f"Page: {page_name}")
 
         price_id = self.getPriceIdToTrack(page_name)
-        print(price_id)
 
         return self.page_content.find("span", class_=price_id)
         
