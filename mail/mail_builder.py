@@ -8,9 +8,9 @@ class MailBuilder:
         self.price_value = price_value
         self.url = url
 
-        with open('./mail/mail.html') as mailContent:
+        with open('./mail/templates/mail.html') as mailContent:
             self.mail_content = mailContent.read()
-        with open('./mail/error-mail.html') as errorMailContent:
+        with open('./mail/templates/error-mail.html') as errorMailContent:
             self.error_mail_content = errorMailContent.read()
 
     def build_mail(self):
