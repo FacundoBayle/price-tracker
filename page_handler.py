@@ -5,11 +5,11 @@ class PageHandler:
     
     def __init__(self, url, page_content):
         self.url = url
+        self.page_content = page_content
         self.PAGES_TRACK_ID = {
             'mercadolibre': "price-tag",
-            'tiendamia': "currenc_price",
+            'tiendamia': "currency_price",
         }
-        self.page_content = page_content
 
     def getPageFromUrl(self):
         for page in self.PAGES_TRACK_ID:
@@ -29,7 +29,7 @@ class PageHandler:
             logging.info(f"Page: {page_name}")
 
         price_id = self.getPriceIdToTrack(page_name)
-
+        
         return self.page_content.find("span", class_=price_id)
         
 

@@ -7,9 +7,7 @@ class MailBuilder:
         self.page_content = page_content
         self.price_value = price_value
         self.url = url
-        with open('./credentials.json') as cred:
-            credentials = json.load(cred)
-            self.email_address = credentials["user"]
+
         with open('./mail/mail.html') as mailContent:
             self.mail_content = mailContent.read()
         with open('./mail/error-mail.html') as errorMailContent:
@@ -18,9 +16,7 @@ class MailBuilder:
     def build_mail(self):
         msg = EmailMessage()
         msg['Subject'] = 'PriceTracker'
-        msg['From'] = self.email_address
-        msg['To'] = self.email_address
-
+       
         mail = self.mail_content.format(price_value=self.price_value.text, url=self.url)
         msg.add_alternative(mail, subtype='html')
 
@@ -30,8 +26,6 @@ class MailBuilder:
     def build_error_mail(self):
         msg = EmailMessage()
         msg['Subject'] = '[ERROR] PriceTracker'
-        msg['From'] = self.email_address
-        msg['To'] = self.email_address
 
         mail = self.error_mail_content.format(url=self.url)
         msg.add_alternative(mail, subtype='html')
