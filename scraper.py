@@ -1,16 +1,18 @@
 import requests
 from bs4 import BeautifulSoup
+from user_agent import UserAgent
 
 class Scraper:
 
     def __init__(self, url):
         self.url = url
-        self.USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
 
     def getPageContent(self):
+        ua = UserAgent().get_user_agent()
         headers_obj = {
-            "User-Agent": self.USER_AGENT
+            "User-Agent": ua
         }
+        
         page = requests.get(self.url, headers=headers_obj)
         soup = BeautifulSoup(page.content, 'html.parser')
         return soup

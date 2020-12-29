@@ -17,7 +17,7 @@ class MailSender:
             self.mail['From'] = self.email_address
             self.mail['To'] = self.email_address
 
-            logging.info("Sending Mail")
+            logging.info("Sending Mail...")
             smtp.send_message(self.mail)
         
     def has_to_send_mail(self):
