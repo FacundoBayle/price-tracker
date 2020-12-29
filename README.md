@@ -34,10 +34,10 @@ To send mails it is necessary to have the login information. Create a root file 
 ## Mails
 
 #### Price Mail
-![price mail](/img/price-mail.png "Price Mail")
+![price mail](/img/price-mail.PNG "Price Mail")
 
 #### Error Mail
-![error mail](/img/error-mail.png "Error Mail")
+![error mail](/img/error-mail.PNG "Error Mail")
 
 ## Logging
 In order to keep track of the performance of the script, a **log.txt** file was added with the necessary information to be able to debug in case of error.
