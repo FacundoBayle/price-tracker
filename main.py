@@ -3,7 +3,6 @@ from scraper import Scraper
 from page_handler import PageHandler
 from mail.mail_builder import MailBuilder
 from mail.mail_sender import MailSender
-from error_handler import PriceNotFoundError
 
 logging.basicConfig(filename="log.txt",
                 level=logging.DEBUG,
